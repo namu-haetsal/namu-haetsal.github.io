@@ -1,44 +1,403 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>나무를 키우는 햇살 by namu-haetsal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">나무를 키우는 햇살</h1>
-      <h2 class="project-tagline"></h2>
-    </section>
+<head>
+  <meta charset="UTF-8">
+  <title>나무를 키우는 햇살 by namu-haetsal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+</head>
+<body>
+  <script type="text/javascript">
+    <!--
+    var closeFg = 0;
+    function closeFrame() {
+      if(closeFg == 1) {
+        document.getElementById("divpop").style.display = "block";
+        document.getElementById("test1").innerText=">>>일정 숨기기<<<";
+        closeFg = 0;
+      }
+      else {
+        document.getElementById("divpop").style.display = "none";
+        document.getElementById("test1").innerText=">>> 일정보기 <<<";
+        closeFg = 1;
+      }
+    } 
 
-    <section class="main-content">
-      <h3>
-<a id="나무를-키우는-햇살-어린이-집에-오신-것을-환영합니다" class="anchor" href="#%EB%82%98%EB%AC%B4%EB%A5%BC-%ED%82%A4%EC%9A%B0%EB%8A%94-%ED%96%87%EC%82%B4-%EC%96%B4%EB%A6%B0%EC%9D%B4-%EC%A7%91%EC%97%90-%EC%98%A4%EC%8B%A0-%EA%B2%83%EC%9D%84-%ED%99%98%EC%98%81%ED%95%A9%EB%8B%88%EB%8B%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>나무를 키우는 햇살 어린이 집에 오신 것을 환영합니다.</h3>
+    var randomArray = new Array();
+    var imgArray = new Array();
 
-<p>나무를 키우는 햇살 어린이집은 2016 신입조합원을 기다리고 있습니다.</p>
 
-<ul>
-<li>2016 8~9월 하반기에 5세 2명, 6세 3명 </li>
-<li>2017 2~3월 상반기에 4세 3명, 5세 2명, 6세 3명, 7세 3명</li>
-</ul>
+    <!-- 여기서 이미지 데이터  시작 400개 이상은 하지 말자. -->
+    imgArray.push("http://cafe.gongdong.or.kr/board_pds/2016/03/24/thumb_600_IMG_20160318_164737.jpg");
+    imgArray.push("http://cafe.gongdong.or.kr/board_pds/2016/03/24/thumb_600_IMG_20160324_121955.jpg");
+    imgArray.push("http://cafe.gongdong.or.kr/board_pds/2016/03/24/thumb_600_IMG_20160324_122744.jpg");
+    imgArray.push("http://cafe.gongdong.or.kr/board_pds/2016/03/24/thumb_600_IMG_20160324_123529.jpg");
+    imgArray.push("http://cafe.gongdong.or.kr/board_pds/2016/03/04/thumb_600_IMG_20160304_153302.jpg");
+    imgArray.push("http://cafe.gongdong.or.kr/board_pds/2016/03/04/thumb_600_IMG_20160304_153716.jpg");
+    imgArray.push("http://cafe.gongdong.or.kr/board_pds/2016/02/26/thumb_600_IMG_20160225_152740.jpg");
+    imgArray.push("http://cafe.gongdong.or.kr/board_pds/2016/02/11/thumb_600_20160205_101605.jpg");
+    <!-- 여기서 이미지 데이터  끝 -->
 
-<p>을 기다리고 있습니다.</p>
+    imgArray.sort(randOrd);
 
-<p>우선 <a href="http://namu-haetsal.github.io/intro.html">안내글</a>을 읽으시고, 대기자방에 전화번호를 남기시거나 010-6281-5351(시냇물)로 전화 해주세요!!</p>
+    function randOrd(){
+      return (Math.round(Math.random())-0.5); 
+    } 
 
-<p>TEL : <strong>031-967-5995</strong></p>
 
-<p>ADDR : <strong>경기도 고양시 덕양구 대장동 240-2번지</strong> (도로명 주소 : 경기도 고양시 덕양구 대주로 125-9 )</p>
+    function resizeImage2(mm) {
+      var width = eval(mm.width);
+      var height = eval(mm.height);
 
-      <footer class="site-footer">
-      </footer>
+      if( width > 600 )  {
+        var p_height = 600 / width;
+        var new_height = height * p_height;
+        eval(mm.width = 600);
+        eval(mm.height = new_height);
+      }
+    }
 
-    </section>
+
+    function resizeImage(imgObj, imgPath) {
+    var maxWidth = 600; // Max width for the image
+    var maxHeight = 400;    // Max height for the image
+    var ratio = 0;  // Used for aspect ratio
+    
+    var orgImg = new Image();
+    orgImg.src = imgPath;
+
+    orgImg.onload = function() {
+    var width = orgImg.width;    // Current image width
+    var height = orgImg.height;  // Current image height
+
+    // Check if the current width is larger than the maxd
+    if(width > maxWidth){
+      ratio = maxWidth / width;   // get ratio for scaling image
+      orgImg.width=maxWidth; // Set new width
+      orgImg.height=(height * ratio);  // Scale height based on ratio
+      height = height * ratio;    // Reset height to match scaled image
+    }
+    width = orgImg.width;    // Current image width
+    height = orgImg.height;  // Current image height
+
+    // Check if current height is larger than max
+    if(height > maxHeight){
+      ratio = maxHeight / height; // get ratio for scaling image
+      orgImg.height=maxHeight;   // Set new height
+      orgImg.width=(width * ratio);    // Scale width based on ratio
+      width = width * ratio;    // Reset width to match scaled image
+    }
+    
+    imgObj.width = orgImg.width;
+    imgObj.height = orgImg.height;
+    
+    orgImg = null;
+  };
+}
+
+function FadeImage(json){
+  //이미지 Fade 설정값
+  var config = {
+    currentImg : 0,
+    nextImg : 1,
+    listArea : e(json.list_area),
+    imageList : e(json.list_area).getElementsByTagName("DIV"),
+    imgCnt   : imgArray.length-1, //0부터 시작
+    changeTime : json.change_time,
+    fadeTime : json.fade_time
+  };
+  
+  var chageTimer = null;
+  
+  //config.imageList[0].style.display = "none";
+  e(json.list_area).style.display = "block";
+  
+  resizeImage(e("imgObj1"),imgArray[0]);
+  e("imgObj1").src=imgArray[0];
+  
+  config.imageList[0].style.display = "block";
+  
+  callFadeOut(); //롤링 시작
+  fadePause(); //마우스 오버시 Fade 멈춤
+  
+  function imgFadeOut() {
+    clearTimeout(chageTimer);
+    chageTimer = null;
+    $("#imgObj1").fadeOut(config.fadeTime,imgChange);
+  };
+  
+  $("#imgObj1").load(function() {
+    //config.imageList[0].style.display = "block";
+    imgFadeIn();
+  });
+  
+  function imgChange() {
+    config.currentImg = config.nextImg;
+    config.nextImg += 1;
+    if(config.currentImg == config.imgCnt) config.nextImg = 0;
+    
+    //config.imageList[0].style.display = "none";
+    resizeImage(e("imgObj1"),imgArray[config.currentImg]);
+    e("imgObj1").src=imgArray[config.currentImg];
+  };
+  
+  function imgFadeIn() {
+    $("#imgObj1").fadeIn(config.fadeTime,callFadeOut);    
+  };
+  
+  function callFadeOut() {
+    chageTimer = setTimeout(function(){imgFadeOut()},config.changeTime);
+  };
+  
+
+  //onmouseover 시 움직임 멈춤
+  function fadePause(){
+    config.listArea.onmouseover = function(){
+      clearTimeout(chageTimer);
+    }
+
+    config.listArea.onmouseout = function(){
+      callFadeOut();
+    }
+  };
+}
+
+
+function RollImage(json){
+  //이미지 롤링 설정값
+  var config = {
+    currentImg : 0,
+    nextImg : 1,
+    listArea : e(json.list_area),
+    imageList : e(json.list_area).getElementsByTagName("DIV"),
+    imgCnt   : imgArray.length-1, //0부터 시작
+    rollTime : json.roll_time,
+    moveTime : json.move_time,
+    coordX1 : 0,
+    coordX2 : e(json.list_area).offsetWidth,
+    coordY : e(json.list_area).offsetHeight,
+    moveAt : json.moveAt,
+    direction : json.direction,
+    label : e(json.label),
+    labelType : json.labelType
+  };
+  
+  e("imgObj1").src=imgArray[0];
+  e(json.list_area).getElementsByTagName("DIV")[0].style.display = "block";
 
   
-  </body>
+  setRoll(config); //롤링 시작
+  rollPause(config); //마우스 오버시 롤링 멈춤
+  
+  //이미지 롤링 기본 세팅하기
+  function setRoll(c){
+    c.coordX1 = 0;
+    c.coordX2 = c.listArea.offsetWidth;
+    c.coordY = e("imgObj1").offsetHeight;
+    
+    if(c.direction=="right" || c.direction=="down"){
+      c.coordX2 = c.coordX2 * -1;
+      c.coordY = c.coordY * -1;
+    }
+    
+    document.getElementById("imgObj1").src=imgArray[c.currentImg];
+    document.getElementById("imgObj2").src=imgArray[c.nextImg];
+    c.imageList[0].style.display = "block";
+    c.imageList[1].style.display = "block";
+    
+    if(c.direction == "left" || c.direction == "right"){
+      c.imageList[0].style.left = c.coordX1 + "px";
+      c.imageList[1].style.left = c.coordX2 + "px";
+    }else if(c.direction == "up" || c.direction == "down"){
+      c.imageList[0].style.top = c.coordX1 + "px";
+      c.imageList[1].style.top = c.coordY + "px";
+    }
+    
+    setPosition(c);
+    //c.imageList[c.nextImg].style.left = c.coordX2+"px";
+    
+    c.rollTimer = setTimeout(function(){imgMove(c)},c.rollTime);
+  };
+
+  //이미지를 움직이게 한다.
+  function imgMove(c){
+    if(c.direction == "left" || c.direction == "right"){
+      c.imageList[0].style.left = c.coordX1 + "px";
+      c.imageList[1].style.left = c.coordX2 + "px";
+    }else if(c.direction == "up" || c.direction == "down"){
+      c.imageList[0].style.top = c.coordX1 + "px";
+      c.imageList[1].style.top = c.coordY + "px";
+    }
+    //alert(c.imageList[c.nextImg].style.left);
+    var moveAt = parseInt(c.moveAt);
+    if (c.direction == "left"){
+      c.coordX1 -= moveAt;
+      c.coordX2 -= moveAt;
+    }else if(c.direction == "right"){
+      c.coordX1 += moveAt;
+      c.coordX2 += moveAt;
+    }else if(c.direction=="up"){
+      c.coordX1 -= moveAt;
+      c.coordY -= moveAt;
+    }else if(c.direction=="down"){
+      c.coordX1 += moveAt;
+      c.coordY += moveAt;
+    }
+    
+    //if(c.coordX1 < (-1*c.listArea.offsetWidth) ) {
+      if( isNextImgRoll(c) ) {
+        c.currentImg = c.nextImg;
+        c.nextImg += 1;
+        if(c.currentImg == c.imgCnt) c.nextImg = 0;
+
+        clearTimeout(c.moveTimer);
+        clearTimeout(c.rollTimer);
+        setRoll(c);
+        return;
+      }
+      c.moveTimer = setTimeout(function(){imgMove(c)},c.moveTime);
+    };
+
+  //다음 이미지 롤링 해야하는지 확인
+  function isNextImgRoll(c){
+    var d = c.direction;
+    if(d=="left" && c.coordX2 < 0 ) return true;
+    else if(d=="right" && c.coordX2 > 0) return true;
+    else if(d=="up" && c.coordY < 0 ) return true;
+    else if(d=="down" && c.coordY > 0) return true;
+
+    return false
+  };
+
+  //롤링 방향에 따른 두번째 이미지 위치 좌표 설정
+  function setPosition(c){
+    var d = c.direction;
+    if(d=="left") c.imageList[1].style.left = c.listArea.offsetWidth+"px";
+    else if(d=="right") c.imageList[1].style.left = (-1 * c.listArea.offsetWidth) + "px";
+    else if(d=="up") c.imageList[1].style.top = c.listArea.offsetHeight + "px";
+    else if(d=="down") c.imageList[1].style.top = (-1 * c.listArea.offsetHeight) + "px";
+
+    //alert(c.imageList[c.nextImg].style.left);
+  };
+  
+  //onmouseover 시 움직임 멈춤
+  function rollPause(c){
+  //alert(c.listArea.onmouseover);
+  c.listArea.onmouseover = function(){
+    clearTimeout(c.rollTimer);
+  }
+
+  c.listArea.onmouseout = function(){
+      //alert("c.listArea.onmouseout");
+      setRoll(c);
+    }
+  };
+}
+
+function debug(t){
+  e("dis").innerHTML = t + "<br>";
+}
+
+//id값으로 객체 반환
+function e(id){
+  var o = document.getElementById(id);
+  if(typeof o == undefined || o == null) { return null;}
+
+  return o;
+}
+
+function randomItem(a) {
+  var isUse = false;
+  var retVal =0;
+  
+  while(true) {
+    retVal = a[Math.floor(Math.random() * a.length)];
+
+    for(var i=0;randomArray.lengh;i++) {
+      if(randomArray[i] == retVal) {
+        isUse = true;
+        break;
+      }
+    }
+    
+    if(!isUse) {
+      randomArray.push(retVal);
+      break;
+    }
+  }
+  
+  return retVal;
+}
+
+function init() {
+  var j1 = {
+    "list_area":"image_list_1",
+    "change_time":"5000",
+    "fade_time":"160"
+  };
+  new FadeImage(j1);
+  
+  /*
+  var j1 = {
+    "list_area":"image_list_1",
+    "moveAt":"50",
+    "roll_time":"4000",
+    "move_time":"100",
+    "direction":"up",
+    "label":"",
+    labelType : ""
+  };
+  new RollImage(j1);
+  */
+}
+
+function popImage(imgObj) {
+  window.open(imgObj.src,'window','location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no, left=0, top=0, scrollbars=yes');
+  return false;
+}
+//-->
+</script>
+
+<section class="page-header">
+  <h1 class="project-name">나무를 키우는 햇살</h1>
+  <h2 class="project-tagline"></h2>
+</section>
+
+<section class="main-content">
+  <h3>
+    <a id="나무를-키우는-햇살-어린이-집에-오신-것을-환영합니다" class="anchor" href="#%EB%82%98%EB%AC%B4%EB%A5%BC-%ED%82%A4%EC%9A%B0%EB%8A%94-%ED%96%87%EC%82%B4-%EC%96%B4%EB%A6%B0%EC%9D%B4-%EC%A7%91%EC%97%90-%EC%98%A4%EC%8B%A0-%EA%B2%83%EC%9D%84-%ED%99%98%EC%98%81%ED%95%A9%EB%8B%88%EB%8B%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>나무를 키우는 햇살 어린이 집에 오신 것을 환영합니다.</h3>
+
+    <p>나무를 키우는 햇살 어린이집은 2016 신입조합원을 기다리고 있습니다.</p>
+
+    <ul>
+      <li>2016 8~9월 하반기에 5세 2명, 6세 3명 </li>
+      <li>2017 2~3월 상반기에 4세 3명, 5세 2명, 6세 3명, 7세 3명</li>
+    </ul>
+
+    <p>을 기다리고 있습니다.</p>
+
+    <p>우선 <a href="http://namu-haetsal.github.io/intro.html">안내글</a>을 읽으시고, 대기자방에 전화번호를 남기시거나 010-6281-5351(시냇물)로 전화 해주세요!!</p>
+
+    <p>TEL : <strong>031-967-5995</strong></p>
+
+    <p>ADDR : <strong>경기도 고양시 덕양구 대장동 240-2번지</strong> (도로명 주소 : 경기도 고양시 덕양구 대주로 125-9 )</p>
+
+    <div id="image_list_1" class="image_list" valign="middle" width="600" height="400" align="center">
+      <div class="images" align="center"><img id="imgObj1" alt="" onclick="popImage(this);" src="" /></div>
+    </div>
+    <p id="test1" align="center" onclick="closeFrame();" style="font-family: '굴림체', '돋움체', Seoul; font-size: 9pt; cursor: pointer">&gt;&gt;&gt;일정 숨기기&lt;&lt;&lt;</p>
+    <div id="divpop"><iframe height="500" src="https://www.google.com/calendar/embed?src=rk6g1dmk5t79l5qdf436gkp9nc%40group.calendar.google.com&amp;ctz=Asia/Seoul" frameborder="0" width="600" scrolling="no" style="border-bottom: 0px; border-left: 0px; border-top: 0px; border-right: 0px"></iframe></div>
+
+    <script>init();</script>
+
+    <footer class="site-footer">
+    </footer>
+
+  </section>
+
+  
+</body>
 </html>
